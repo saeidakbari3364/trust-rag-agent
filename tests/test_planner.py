@@ -1,4 +1,4 @@
-from app.planner import Planner
+from trust_rag_agent.planner import Planner
 
 
 def test_planner_creates_tasks():

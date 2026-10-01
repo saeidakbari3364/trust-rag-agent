@@ -1,5 +1,4 @@
-from app.planner import Planner
-
+from .planner import Planner
 
 class TrustRAGAgent:
 
