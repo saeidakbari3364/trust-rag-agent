@@ -1,0 +1,7 @@
+Quantum computing for AI agents may introduce challenges related to computational complexity, limited quantum hardware, noise, error correction, and the difficulty of integrating quantum algorithms with existing AI systems.
+
+Quantum hardware is currently limited by noise and errors. AI agents that depend on quantum computation may therefore need robust methods for handling unreliable quantum outputs.
+
+Another challenge is the integration of quantum algorithms with classical AI systems. Hybrid quantum-classical architectures may require new methods for coordinating classical and quantum computation.
+
+Evaluation is also challenging because quantum AI systems may require different benchmarks and evaluation methods compared with conventional AI systems.

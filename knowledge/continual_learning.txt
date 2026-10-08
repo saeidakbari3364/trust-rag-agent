@@ -1,0 +1,13 @@
+Continual learning is the ability of an AI system to learn from new data or tasks over time while retaining previously acquired knowledge.
+
+A major challenge in continual learning is catastrophic forgetting. Catastrophic forgetting occurs when learning new information causes a model to lose previously learned knowledge.
+
+Another challenge is the stability-plasticity trade-off. Plasticity allows a model to learn new information, while stability helps the model preserve previously learned knowledge.
+
+Data efficiency is also important because continual learning systems may have limited access to previous training data. Models therefore need to learn effectively from relatively small amounts of new data.
+
+Distribution shift is another challenge. The distribution of new data may differ from previous data, causing the model to perform poorly on earlier or new tasks.
+
+Continual learning in AI agents can also involve safety problems. An adaptive agent should not learn harmful or unreliable behaviors from new interactions.
+
+Evaluation is difficult because a continual learning system must be evaluated not only on its newest task but also on its ability to retain knowledge from previous tasks.
