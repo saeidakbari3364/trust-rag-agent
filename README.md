@@ -1,4 +1,3 @@
-
 # TrustRAG-Agent 🛡️🤖
 
 ### A Trustworthy and Adaptive Agent for Evidence-Based Question Answering
@@ -6,9 +5,8 @@
 > A lightweight research prototype exploring how an AI agent can **plan, retrieve evidence, validate information, adapt when evidence is insufficient, and generate grounded answers**.
 
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/AI-Agent-Research-8A2BE2)](https://github.com/)
+[![AI Agent](https://img.shields.io/badge/AI-Agent-8A2BE2)](https://github.com/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-Ready-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ---
 
@@ -76,7 +74,7 @@ The agent follows the following workflow:
                └──────┬──────┘  └────────┬────────┘
                       │                  │
                       │                  ▼
-                      │          Retrieve Again
+                      │          Search Again
                       │                  │
                       │                  ▼
                       │          Validate Again
@@ -94,13 +92,13 @@ The agent follows the following workflow:
                     ┌─────────────────┐
                     │ Trusted Answer  │
                     └─────────────────┘
-````
+```
 
 ---
 
 # 🔬 Research Motivation
 
-This project is inspired by several important research directions in modern Agentic AI:
+This project is inspired by several important research directions in modern Agentic AI.
 
 ### 1. Planning & Reasoning
 
@@ -161,18 +159,19 @@ The final answer also passes through a simple grounding/safety check.
 
 # ✨ Key Features
 
-* 🧠 Task-based planning
-* 🔎 Evidence retrieval
-* ✅ Evidence validation
-* 🔄 Adaptive re-planning
-* 🛡️ Basic answer grounding check
-* 🚫 Refusal when evidence is insufficient
-* 🤖 LLM-based planning and generation
-* 📚 Local knowledge base
-* 🐍 Python-based implementation
-* ⚡ Lightweight architecture
-* 🧪 Unit testing
-* 🚀 Designed for future FastAPI deployment
+- 🧠 Task-based planning
+- 🔎 Evidence retrieval
+- ✅ Evidence validation
+- 🔄 Adaptive re-planning
+- 🛡️ Basic answer grounding check
+- 🚫 Refusal when evidence is insufficient
+- 🤖 LLM-based planning and generation
+- 📚 Local knowledge base
+- 🌐 FastAPI REST API
+- 📖 Automatic Swagger and ReDoc documentation
+- 🐍 Python-based implementation
+- ⚡ Lightweight architecture
+- 🧪 Unit testing
 
 ---
 
@@ -229,7 +228,9 @@ trust-rag-agent/
 │   ├── continual_learning.txt
 │   └── quantum_ai.txt
 │
+├── api.py
 ├── main.py
+│
 ├── test_llm_planner.py
 ├── test_evidence.py
 ├── test_validator.py
@@ -246,15 +247,16 @@ trust-rag-agent/
 
 # ⚙️ Technologies
 
-| Technology | Purpose                             |
-| ---------- | ----------------------------------- |
-| Python     | Core implementation                 |
-| Pydantic   | Data validation                     |
-| uv         | Dependency & environment management |
-| Pytest     | Testing                             |
-| LLM API    | Planning & answer generation        |
-| FastAPI    | Planned API layer                   |
-| Docker     | Planned containerization            |
+| Technology | Purpose |
+|---|---|
+| Python | Core implementation |
+| Pydantic | Data validation |
+| uv | Dependency & environment management |
+| Pytest | Testing |
+| LLM API | Planning & answer generation |
+| FastAPI | REST API |
+| Uvicorn | API server |
+| Docker | Planned containerization |
 
 ---
 
@@ -300,7 +302,7 @@ __pycache__/
 
 ---
 
-## 4. Run the agent
+## 4. Run the CLI agent
 
 ```bash
 uv run python main.py
@@ -308,7 +310,200 @@ uv run python main.py
 
 ---
 
-# 🧪 Example
+# 🚀 FastAPI API
+
+TrustRAG-Agent can be accessed through a REST API built with FastAPI.
+
+The API provides a simple interface for sending questions to the agent and receiving evidence-based answers.
+
+## API Architecture
+
+```text
+Client
+   │
+   │ POST /ask
+   ▼
+┌─────────────────┐
+│    FastAPI      │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ TrustRAG-Agent  │
+└────────┬────────┘
+         │
+         ├── Planning
+         ├── Evidence Retrieval
+         ├── Evidence Validation
+         ├── Adaptive Re-planning
+         ├── Answer Generation
+         └── Safety Check
+         │
+         ▼
+┌─────────────────┐
+│  JSON Response  │
+└─────────────────┘
+```
+
+---
+
+## Start the API
+
+Run:
+
+```bash
+uv run uvicorn api:app --reload
+```
+
+The API will be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## API Documentation
+
+FastAPI automatically provides interactive API documentation.
+
+### Swagger UI
+
+Open:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+### ReDoc
+
+Open:
+
+```text
+http://127.0.0.1:8000/redoc
+```
+
+---
+
+# 📡 API Endpoints
+
+## GET `/`
+
+Returns basic information about the API.
+
+Example response:
+
+```json
+{
+  "name": "TrustRAG-Agent API",
+  "version": "0.1.0",
+  "status": "running"
+}
+```
+
+---
+
+## GET `/health`
+
+Health check endpoint.
+
+Example response:
+
+```json
+{
+  "status": "healthy"
+}
+```
+
+---
+
+## POST `/ask`
+
+Send a question to the TrustRAG-Agent.
+
+### Request
+
+```json
+{
+  "question": "What are the challenges of quantum computing for AI agents?"
+}
+```
+
+### Example response
+
+```json
+{
+  "question": "What are the challenges of quantum computing for AI agents?",
+  "answer": "The challenges include computational complexity, limited quantum hardware, noise and errors, and difficulty integrating quantum algorithms with existing classical AI systems."
+}
+```
+
+---
+
+# 🧪 Testing the API
+
+You can test the API using Swagger UI:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+Or using `curl`:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/ask" \
+  -H "Content-Type: application/json" \
+  -d "{\"question\":\"What are the challenges of quantum computing for AI agents?\"}"
+```
+
+---
+
+# 🔄 API Request Flow
+
+A request to `/ask` follows the complete agent pipeline:
+
+```text
+POST /ask
+   │
+   ▼
+Validate Question
+   │
+   ▼
+Planning
+   │
+   ▼
+Evidence Retrieval
+   │
+   ▼
+Evidence Validation
+   │
+   ├───────────────┐
+   │               │
+Enough?           No
+   │               │
+  Yes              ▼
+   │        Adaptive Re-planning
+   │               │
+   │               ▼
+   │        Retrieve Again
+   │               │
+   │               ▼
+   │        Validate Again
+   │               │
+   └───────┬───────┘
+           ▼
+    Answer Generation
+           │
+           ▼
+      Safety Check
+           │
+           ▼
+      JSON Response
+```
+
+---
+
+# 🧠 Example
 
 Input:
 
@@ -332,7 +527,7 @@ Then:
 ```text
 [2] Retrieving evidence...
 
-Retrieved 9 evidence items.
+Retrieved evidence items.
 ```
 
 Then:
@@ -340,7 +535,7 @@ Then:
 ```text
 [3] Validating evidence...
 
-Valid evidence: 6
+Valid evidence is identified.
 ```
 
 If enough evidence exists:
@@ -520,10 +715,10 @@ tests/test_planner.py .                                      [100%]
 
 Additional tests cover:
 
-* Planner
-* Evidence retrieval
-* Evidence validation
-* Adaptive re-planning
+- Planner
+- Evidence retrieval
+- Evidence validation
+- Adaptive re-planning
 
 ---
 
@@ -533,17 +728,17 @@ This project is intentionally small and should be considered a **prototype**.
 
 Current limitations include:
 
-* Local keyword-based retrieval
-* Simple relevance scoring
-* Basic evidence validation
-* Basic grounding check
-* No vector database
-* No sophisticated semantic retrieval
-* No reinforcement learning
-* No persistent agent memory
-* No formal safety benchmark
-* No large-scale evaluation
-* No true continual-learning algorithm
+- Local keyword-based retrieval
+- Simple relevance scoring
+- Basic evidence validation
+- Basic grounding check
+- No vector database
+- No sophisticated semantic retrieval
+- No reinforcement learning
+- No persistent agent memory
+- No formal safety benchmark
+- No large-scale evaluation
+- No true continual-learning algorithm
 
 These limitations also provide clear directions for future research.
 
@@ -551,9 +746,7 @@ These limitations also provide clear directions for future research.
 
 # 🔮 Future Work
 
-Possible extensions include:
-
-### Semantic Retrieval
+## Semantic Retrieval
 
 Replace keyword matching with:
 
@@ -567,25 +760,25 @@ Semantic Retrieval
 
 Possible technologies:
 
-* FAISS
-* Qdrant
-* Chroma
+- FAISS
+- Qdrant
+- Chroma
 
 ---
 
-### Better Evidence Validation
+## Better Evidence Validation
 
 Introduce:
 
-* NLI-based verification
-* Cross-source consistency checking
-* LLM-as-a-judge
-* Citation verification
-* Contradiction detection
+- NLI-based verification
+- Cross-source consistency checking
+- LLM-as-a-judge
+- Citation verification
+- Contradiction detection
 
 ---
 
-### Advanced Planning
+## Advanced Planning
 
 Replace the simple planner with more advanced agent reasoning:
 
@@ -605,7 +798,7 @@ Re-planning
 
 ---
 
-### Continual Learning
+## Continual Learning
 
 A future version could allow the agent to learn from new interactions while controlling:
 
@@ -623,58 +816,40 @@ This would move the project closer to genuine **continual learning for agentic s
 
 ---
 
-### Safety
+## Advanced Safety
 
 Future versions could include:
 
-* Hallucination detection
-* Prompt injection detection
-* Unsafe instruction detection
-* Source reliability scoring
-* Confidence estimation
-* Answer abstention
-* Adversarial evaluation
+- Hallucination detection
+- Prompt injection detection
+- Unsafe instruction detection
+- Source reliability scoring
+- Confidence estimation
+- Answer abstention
+- Adversarial evaluation
 
 ---
 
-### Production API
+## Production Deployment
 
-The agent can be exposed through:
+Future work includes containerizing the API:
 
 ```text
 FastAPI
    ↓
 Docker
    ↓
-REST API
+Production Deployment
 ```
 
-Example future endpoint:
+Additional production features may include:
 
-```http
-POST /ask
-```
-
-Request:
-
-```json
-{
-  "question": "What are the challenges of continual learning?"
-}
-```
-
-Response:
-
-```json
-{
-  "answer": "...",
-  "confidence": 0.87,
-  "evidence_sufficient": true,
-  "sources": [
-    "continual_learning.txt"
-  ]
-}
-```
+- Authentication
+- Rate limiting
+- Structured logging
+- Monitoring
+- Request tracing
+- API versioning
 
 ---
 
@@ -682,16 +857,16 @@ Response:
 
 This project explores several concepts directly relevant to research in **Trustworthy and Adaptive Agentic AI**:
 
-| Research Area                  | Project Component    |
-| ------------------------------ | -------------------- |
-| Planning & Reasoning           | `Planner`            |
-| Trustworthy AI                 | `EvidenceValidator`  |
-| Adaptive Agents                | `AdaptiveReplanner`  |
-| Hallucination Awareness        | `SafetyChecker`      |
-| Evidence-Based Generation      | `AnswerGenerator`    |
-| Retrieval-Augmented Generation | `EvidenceRetriever`  |
-| Continual Learning             | Future extension     |
-| Agentic AI                     | Overall architecture |
+| Research Area | Project Component |
+|---|---|
+| Planning & Reasoning | `Planner` |
+| Trustworthy AI | `EvidenceValidator` |
+| Adaptive Agents | `AdaptiveReplanner` |
+| Hallucination Awareness | `SafetyChecker` |
+| Evidence-Based Generation | `AnswerGenerator` |
+| Retrieval-Augmented Generation | `EvidenceRetriever` |
+| Continual Learning | Future extension |
+| Agentic AI | Overall architecture |
 
 ---
 
@@ -710,11 +885,12 @@ The current implementation provides a small experimental environment for explori
 **Saeid Akbari**
 
 AI Engineer & Educator
+
 Python • Machine Learning • Deep Learning • MLOps • Generative AI • Agentic AI
 
 GitHub:
 
-`https://github.com/saeidakbari3364`
+https://github.com/saeidakbari3364
 
 ---
 
@@ -738,6 +914,8 @@ Adaptive Re-planning
 Grounded Answer Generation
    ↓
 Safety Check
+   ↓
+FastAPI REST API
 ```
 
 Future versions will investigate more advanced retrieval, reasoning, memory, continual learning, and safety mechanisms.
@@ -757,7 +935,3 @@ And when the evidence is not enough:
 > **Know when not to answer.**
 
 That is the central idea behind **TrustRAG-Agent**.
-
-```
-
-
