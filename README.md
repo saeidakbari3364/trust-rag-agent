@@ -1,8 +1,4 @@
-حتماً. برای این پروژه بهتر است README فقط توضیح فنی نباشد؛ چون هدف تو ارائه پروژه به یک استاد در حوزه **Trustworthy & Adaptive Agentic AI** است، README باید از همان ابتدا نشان دهد که پروژه چه مسئله پژوهشی را هدف گرفته و چرا معماری آن به **Planning, Evidence Validation, Adaptive Re-planning و Safety** مرتبط است.
 
-نسخه پیشنهادی من:
-
-````markdown
 # TrustRAG-Agent 🛡️🤖
 
 ### A Trustworthy and Adaptive Agent for Evidence-Based Question Answering
